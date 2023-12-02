@@ -34,7 +34,17 @@ open class TabBar: UITabBar {
             removeAllButtons()
             
             let buttons = (items ?? []).enumerated().map { (index, item) in
-                makeTabBarButton(for: item, at: index)
+                let button = makeTabBarButton(for: item, at: index)
+                let identifier = UIAction.Identifier(#function)
+                let action = UIAction(
+                    identifier: identifier,
+                    handler: { [weak self, index] _ in
+                        self?.onTriggerButton(at: index)
+                    }
+                )
+                button.removeAction(identifiedBy: identifier, for: .primaryActionTriggered)
+                button.addAction(action, for: .primaryActionTriggered)
+                return button
             }
             addTabBarButtons(buttons)
         }
@@ -90,12 +100,7 @@ open class TabBar: UITabBar {
     }
     
     open func makeTabBarButton(for item: UITabBarItem, at index: Int) -> TabBarButton {
-        let button = TabBarButton(item)
-        let action = UIAction(handler: { [weak self, index] _ in
-            self?.onTriggerButton(at: index)
-        })
-        button.addAction(action, for: .primaryActionTriggered)
-        return button
+        TabBarButton(item)
     }
     
     func addTabBarButtons(_ buttons: [TabBarButton]) {
