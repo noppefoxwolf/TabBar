@@ -39,8 +39,8 @@ let package = Package(
             
             dependencies: [
                 .product(
-                    name: "Tabbar",
-                    package: "Tabbar"
+                    name: "TabBar",
+                    package: "TabBar"
                 )
             ],
             

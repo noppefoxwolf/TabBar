@@ -1,5 +1,5 @@
 import SwiftUI
-import Tabbar
+import TabBar
 
 @main
 struct App: SwiftUI.App {
@@ -26,12 +26,12 @@ struct ViewController: UIViewControllerRepresentable {
                     Text("Hello, World!")
                 }
             })
-            vc.tabBarItem = UITabBarItem(
+            vc.TabBarItem = UITabBarItem(
                 title: "\(index) Item",
                 image: UIImage(systemName: "house"),
                 tag: index
             )
-            vc.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
+            vc.TabBarItem.selectedImage = UIImage(systemName: "house.fill")
             return vc
         }
         let vcs2 = (0..<1).map { index in
@@ -40,15 +40,15 @@ struct ViewController: UIViewControllerRepresentable {
                     Text("Hello, TabBar!")
                 }
             })
-            vc.tabBarItem = UITabBarItem(
+            vc.TabBarItem = UITabBarItem(
                 title: "\(index) Item",
                 image: UIImage(systemName: "bell"),
                 tag: index
             )
-            vc.tabBarItem.selectedImage = UIImage(systemName: "bell.fill")
+            vc.TabBarItem.selectedImage = UIImage(systemName: "bell.fill")
             return vc
         }
-        uiViewController.setTabbar(TabBar())
+        uiViewController.setTabBar(TabBar())
         uiViewController.setViewControllers(vcs + vcs2, animated: false)
     }
 }
