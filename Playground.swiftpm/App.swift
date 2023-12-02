@@ -26,12 +26,12 @@ struct ViewController: UIViewControllerRepresentable {
                     Text("Hello, World!")
                 }
             })
-            vc.TabBarItem = UITabBarItem(
+            vc.tabBarItem = UITabBarItem(
                 title: "\(index) Item",
                 image: UIImage(systemName: "house"),
                 tag: index
             )
-            vc.TabBarItem.selectedImage = UIImage(systemName: "house.fill")
+            vc.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
             return vc
         }
         let vcs2 = (0..<1).map { index in
@@ -40,12 +40,12 @@ struct ViewController: UIViewControllerRepresentable {
                     Text("Hello, TabBar!")
                 }
             })
-            vc.TabBarItem = UITabBarItem(
+            vc.tabBarItem = UITabBarItem(
                 title: "\(index) Item",
                 image: UIImage(systemName: "bell"),
                 tag: index
             )
-            vc.TabBarItem.selectedImage = UIImage(systemName: "bell.fill")
+            vc.tabBarItem.selectedImage = UIImage(systemName: "bell.fill")
             return vc
         }
         uiViewController.setTabBar(TabBar())
