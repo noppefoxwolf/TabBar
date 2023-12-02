@@ -6,7 +6,7 @@ final class CustomTabBar: TabBar {
 ```
 
 ```swift
-tabBarController.setTabbar(CustomTabBar())
+tabBarController.setTabBar(CustomTabBar())
 ```
 
 # Install
@@ -14,7 +14,7 @@ tabBarController.setTabbar(CustomTabBar())
 Swift Package Manager
 
 ```swift
-.package(url: "https://github.com/noppefoxwolf/Tabbar", from: "0.0.x")
+.package(url: "https://github.com/noppefoxwolf/TabBar", from: "0.0.x")
 ```
 
 # LICENSE

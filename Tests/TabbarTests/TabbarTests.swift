@@ -1,7 +1,7 @@
 import XCTest
-@testable import Tabbar
+@testable import TabBar
 
-final class TabbarTests: XCTestCase {
+final class TabBarTests: XCTestCase {
     func testExample() throws {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest
