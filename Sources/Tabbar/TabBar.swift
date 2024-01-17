@@ -19,8 +19,10 @@ open class TabBar: UITabBar {
         stackView.alignment = .center
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        let topConstraint = stackView.topAnchor.constraint(equalTo: topAnchor)
+        topConstraint.priority = .defaultLow
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
+            topConstraint,
             safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
