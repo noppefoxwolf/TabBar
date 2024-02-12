@@ -7,12 +7,15 @@ extension UIWindowScene {
         // scrollRectToVisibleだとcellのリサイズを加味してくれないのでindexPathで飛ばす
         let indexPath = IndexPath(row: 0, section: 0)
         if let tableView = scrollView as? UITableView, tableView.hasIndexPath(indexPath) {
+            tableView.stopScroll()
             tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
         } else if let collectionView = scrollView as? UICollectionView,
             collectionView.hasIndexPath(indexPath)
         {
+            collectionView.stopScroll()
             collectionView.scrollToItem(at: indexPath, at: .top, animated: animated)
         } else {
+            scrollView.stopScroll()
             // https://stackoverflow.com/a/15619927/1131587
             let isScrolling = scrollView.layer.animation(forKey: "bounds") != nil
             if !isScrolling {
@@ -50,5 +53,12 @@ extension UICollectionView {
         guard indexPath.section < numberOfSections else { return false }
         guard indexPath.row < numberOfItems(inSection: indexPath.section) else { return false }
         return true
+    }
+}
+
+extension UIScrollView {
+    // https://stackoverflow.com/a/23290943/1131587
+    func stopScroll() {
+        setContentOffset(contentOffset, animated:false)
     }
 }
