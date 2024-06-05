@@ -9,6 +9,13 @@ final class CustomTabBar: TabBar {
 tabBarController.setTabBar(CustomTabBar())
 ```
 
+## itemPositioning
+
+```swift
+tabBar.itemPositioning = .fill
+tabBar.itemPositioning = .centered
+```
+
 # Install
 
 Swift Package Manager

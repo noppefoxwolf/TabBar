@@ -50,6 +50,7 @@ struct ViewController: UIViewControllerRepresentable {
         }
         uiViewController.setTabBar(TabBar())
         uiViewController.setViewControllers(vcs + vcs2, animated: false)
+        //uiViewController.tabBar.itemPositioning = .centered
     }
 }
 

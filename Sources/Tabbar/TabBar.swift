@@ -3,6 +3,8 @@ import UIKit
 open class TabBar: UITabBar {
     
     let stackView = UIStackView()
+    var leadingConstraint: NSLayoutConstraint!
+    var trailingConstraint: NSLayoutConstraint!
     
     public init() {
         super.init(frame: .null)
@@ -17,15 +19,19 @@ open class TabBar: UITabBar {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .center
+        stackView.spacing = UIStackView.spacingUseSystem
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         let topConstraint = stackView.topAnchor.constraint(equalTo: topAnchor)
         topConstraint.priority = .defaultLow
+        leadingConstraint = stackView.leadingAnchor.constraint(equalTo: leadingAnchor)
+        trailingConstraint = trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
         NSLayoutConstraint.activate([
             topConstraint,
             safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            leadingConstraint,
+            trailingConstraint,
         ])
     }
     
@@ -46,6 +52,9 @@ open class TabBar: UITabBar {
                 )
                 button.removeAction(identifiedBy: identifier, for: .primaryActionTriggered)
                 button.addAction(action, for: .primaryActionTriggered)
+                NSLayoutConstraint.activate([
+                    button.widthAnchor.constraint(greaterThanOrEqualToConstant: 100)
+                ])
                 return button
             }
             addTabBarButtons(buttons)
@@ -57,7 +66,26 @@ open class TabBar: UITabBar {
         set { _items = newValue }
     }
     
+    var _itemPositioning: UITabBar.ItemPositioning = .automatic {
+        didSet {
+            switch _itemPositioning {
+            case .automatic, .fill:
+                leadingConstraint.isActive = true
+                trailingConstraint.isActive = true
+            case .centered:
+                leadingConstraint.isActive = false
+                trailingConstraint.isActive = false
+            }
+        }
+    }
+    
+    open override var itemPositioning: UITabBar.ItemPositioning {
+        get { _itemPositioning }
+        set { _itemPositioning = newValue }
+    }
+    
     public override func setItems(_ items: [UITabBarItem]?, animated: Bool) {
+//        super.setItems(items, animated: animated)
         _items = items
     }
     
