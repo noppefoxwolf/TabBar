@@ -9,6 +9,13 @@ open class TabBar: UITabBar {
     public init() {
         super.init(frame: .null)
         loadView()
+        
+        registerForTraitChanges(
+            [UITraitHorizontalSizeClass.self],
+            handler: { (traitEnvironment: Self, previousTraitCollection) in
+                traitEnvironment.layoutItemPositioning()
+            }
+        )
     }
     
     required public init?(coder: NSCoder) {
@@ -68,15 +75,29 @@ open class TabBar: UITabBar {
     
     var _itemPositioning: UITabBar.ItemPositioning = .automatic {
         didSet {
-            switch _itemPositioning {
-            case .automatic, .fill:
-                leadingConstraint.isActive = true
-                trailingConstraint.isActive = true
-            case .centered:
+            layoutItemPositioning()
+        }
+    }
+    
+    func layoutItemPositioning() {
+        switch _itemPositioning {
+        case .automatic:
+            switch traitCollection.horizontalSizeClass {
+            case .compact:
                 leadingConstraint.isActive = false
                 trailingConstraint.isActive = false
+            case .regular, .unspecified:
+                leadingConstraint.isActive = true
+                trailingConstraint.isActive = true
             }
+        case .fill:
+            leadingConstraint.isActive = true
+            trailingConstraint.isActive = true
+        case .centered:
+            leadingConstraint.isActive = false
+            trailingConstraint.isActive = false
         }
+        setNeedsLayout()
     }
     
     open override var itemPositioning: UITabBar.ItemPositioning {
