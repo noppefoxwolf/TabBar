@@ -89,6 +89,8 @@ open class TabBar: UITabBar {
             case .regular, .unspecified:
                 leadingConstraint.isActive = true
                 trailingConstraint.isActive = true
+            @unknown default:
+                break
             }
         case .fill:
             leadingConstraint.isActive = true
@@ -96,6 +98,8 @@ open class TabBar: UITabBar {
         case .centered:
             leadingConstraint.isActive = false
             trailingConstraint.isActive = false
+        @unknown default:
+            break
         }
         setNeedsLayout()
     }
