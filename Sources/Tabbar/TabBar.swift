@@ -26,6 +26,7 @@ open class TabBar: UITabBar {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .center
+        stackView.alignment = .fill
         stackView.spacing = UIStackView.spacingUseSystem
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -173,6 +174,16 @@ open class TabBar: UITabBar {
     
     var buttons: [TabBarButton] {
         stackView.arrangedSubviews.compactMap({ $0 as? TabBarButton })
+    }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        // adjust height
+        let prefferedHeight = bounds.height - safeAreaInsets.bottom
+        NSLayoutConstraint.activate(buttons.map { button in
+            button.heightAnchor.constraint(equalToConstant: prefferedHeight)
+        })
     }
 }
 
