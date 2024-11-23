@@ -14,6 +14,7 @@ open class TabBarButton: UIButton {
         tintColor = .label
         isPointerInteractionEnabled = true
         layer.cornerRadius = 6
+        accessibilityIdentifier = item.accessibilityIdentifier
         onChangedSelected(isSelected)
         
         NotificationCenter.default
