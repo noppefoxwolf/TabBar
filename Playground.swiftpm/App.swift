@@ -48,7 +48,10 @@ struct ViewController: UIViewControllerRepresentable {
             vc.tabBarItem.selectedImage = UIImage(systemName: "bell.fill")
             return vc
         }
-        uiViewController.setTabBar(TabBar())
+        
+        if uiViewController.supportsCustomTabBar {
+            uiViewController.setTabBar(TabBar())
+        }
         uiViewController.setViewControllers(vcs + vcs2, animated: false)
         //uiViewController.tabBar.itemPositioning = .centered
     }
