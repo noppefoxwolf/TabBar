@@ -9,6 +9,9 @@ extension UIViewController {
         if isModernSegmentedStyle {
             return false
         }
+        if isVisionOS {
+            return false
+        }
         return true
     }
     
@@ -18,6 +21,14 @@ extension UIViewController {
         } else {
             false
         }
+    }
+}
+
+fileprivate var isVisionOS: Bool {
+    if #available(visionOS 1.0, *) {
+        true
+    } else {
+        false
     }
 }
 
