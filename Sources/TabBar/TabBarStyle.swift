@@ -25,11 +25,11 @@ extension UIViewController {
 }
 
 fileprivate var isVisionOS: Bool {
-    if #available(visionOS 1.0, *) {
-        true
-    } else {
-        false
-    }
+    #if os(iOS)
+    false
+    #elseif os(visionOS)
+    true
+    #endif
 }
 
 fileprivate var isLiquidGlassStyle: Bool {
